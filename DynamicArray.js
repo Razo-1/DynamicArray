@@ -66,4 +66,26 @@ class DynamicArray{
         this.#capacity = newCap;
         this.#arr = newArr;
     }
+    front(){
+        if(this.isEmpty()) return -1;
+        return this.#arr[0];
+    }
+    back(){
+        if(this.isEmpty()) return -1;
+        return this.#arr[this.#size - 1];
+    }
+    pushBack(value){
+        if(!Number.isInteger(value)) throw new Error('Value Must be an integer number.');
+        if(this.#size === this.#capacity){
+            let newCap = this.#capacity * this.#GROWTH;
+            this.#resize(newCap)
+        }
+        this.#arr[this.size++] = value;
+    }
+    popBack(){
+        if(this.isEmpty()) return -1;
+        let tmp = this.#arr[--this.#size];
+        this.#arr[this.#size] = this.#fill;
+        return tmp;
+    }
 }
