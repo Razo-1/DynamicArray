@@ -29,8 +29,14 @@ class DynamicArray{
         return this.#arr.fill(this.#fill)
     }
     at(index){
-        if(!Number.isInteger(index)) throw new Error('Must be an integer number.');
+        if(!Number.isInteger(index)) throw new Error('Index Must be an integer number.');
         if(index < 0 || index >= this.#size) throw new Error('Index error');
         return this.#arr[index];
+    }
+    set(index,value){
+        if(!Number.isInteger(index)) throw new Error('Index Must be an integer number.');
+        if(index < 0 || index >= this.#size) throw new Error('Index error');
+        if(!Number.isInteger(value)) throw new Error('Value Must be an integer number.');
+        this.#arr[index] = value
     }
 }
