@@ -17,7 +17,15 @@ class DynamicArray{
     }
 
     size(){
-        return this.#size
+        return this.#size;
     }
-
+    capacity(){
+        return this.#capacity;
+    }
+    isEmpty(){
+        return this.#size === 0;
+    }
+    clear(){
+        return this.#arr.fill(this.#fill)
+    }
 }
