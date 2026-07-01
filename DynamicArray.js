@@ -6,8 +6,8 @@ class DynamicArray{
     #fill;
 
     constructor(capacity = 8,fill = 0){
-        if(!Number.isInteger(capacity) || !Number.isInteger(fill)) throw new Error('Must be an integer number.')
-        if(capacity <= 0) throw new Error('Capacity must be an integer number')
+        if(!Number.isInteger(capacity) || !Number.isInteger(fill)) throw new Error('Must be an integer number.');
+        if(capacity <= 0) throw new Error('Capacity must be an integer number');
 
         this.#capacity = capacity;
         this.#size = 0;
@@ -27,5 +27,10 @@ class DynamicArray{
     }
     clear(){
         return this.#arr.fill(this.#fill)
+    }
+    at(index){
+        if(!Number.isInteger(index)) throw new Error('Must be an integer number.');
+        if(index < 0 || index >= this.#size) throw new Error('Index error');
+        return this.#arr[index];
     }
 }
