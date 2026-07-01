@@ -41,7 +41,7 @@ class DynamicArray{
     }
     insert(index,value){
         if(!Number.isInteger(index)) throw new Error('Index Must be an integer number.');
-        if(index < 0 || index >= this.#size) throw new Error('Index error');
+        if(index < 0 || index > this.#size) throw new Error('Index error');
         if(!Number.isInteger(value)) throw new Error('Value Must be an integer number.');
         if(this.#capacity === this.#size){
             let newCap = this.#capacity * this.#GROWTH;
@@ -51,7 +51,7 @@ class DynamicArray{
             this.#arr[i] = this.#arr[i - 1];
         }
         this.#arr[index] = value;
-        ++this.#sizel;
+        ++this.#size;
     }
     #resize(newCap){
         if(!Number.isInteger(newCap)) throw new Error('Must be an integer number.');
@@ -80,7 +80,7 @@ class DynamicArray{
             let newCap = this.#capacity * this.#GROWTH;
             this.#resize(newCap)
         }
-        this.#arr[this.size++] = value;
+        this.#arr[this.#size++] = value;
     }
     popBack(){
         if(this.isEmpty()) return -1;
@@ -89,7 +89,7 @@ class DynamicArray{
         return tmp;
     }
     toArray(){
-        let newArray = new Int32Array(this.#capacity);
+        let newArray = new Int32Array(this.#size);
         for(let i = 0 ;i < this.#size;i++){
             newArray[i] = this.#arr[i];
         }
@@ -107,11 +107,11 @@ class DynamicArray{
         let i = 0;
         let j = this.#size - 1;
         while(i < j){
-            this.swape(i++,j--);
+            this.swap(i++,j--);
         }
     }
-    swape(i,j){
-        if(this.at(i) || this.at(j)){
+    swap(i,j){
+        if(i >= 0 && i < this.#size && j >= 0 && j < this.#size){
             [this.#arr[i], this.#arr[j]] = [this.#arr[j], this.#arr[i]];
         }
     }
@@ -124,4 +124,28 @@ class DynamicArray{
             }
         }
     }
+    sort(compareFn){
+        if(this.isEmpty()) throw new Error('Array is Empty!');
+        const partionLast = (left,right) => {
+            let pivot = this.#arr[right];
+            let i = left - 1
+            for(let j = 0;j < right;++j){
+                if(compareFn(this.#arr[j],pivot) < 0){
+                    this.swap(++i,j);
+                }
+            }
+            this.swap(i + 1,right);
+            return i + 1;
+        }
+        const quickSort = (left,right) => {
+            if(left < right){
+                let pi = partionLast(left,right)
+                quickSort(left,pi - 1);
+                quickSort(pi + 1,right);
+            }
+        }
+        quickSort(0,this.#size - 1);
+   }
 }
+
+
