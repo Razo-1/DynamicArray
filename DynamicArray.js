@@ -98,5 +98,21 @@ class DynamicArray{
     toString(){
         return this.toArray();
     }
-    
+    *enteris(){
+        for(let i = 0;i < this.#size;i++){
+            yield [i,this.#arr[i]];
+        }
+    }
+    reverse(){
+        let i = 0;
+        let j = this.#size - 1;
+        while(i < j){
+            this.swape(i++,j--);
+        }
+    }
+    swape(i,j){
+        if(this.at(i) || this.at(j)){
+            [this.#arr[i], this.#arr[j]] = [this.#arr[j], this.#arr[i]];
+        }
+    }
 }
