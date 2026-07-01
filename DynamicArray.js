@@ -88,4 +88,15 @@ class DynamicArray{
         this.#arr[this.#size] = this.#fill;
         return tmp;
     }
+    toArray(){
+        let newArray = new Int32Array(this.#capacity);
+        for(let i = 0 ;i < this.#size;i++){
+            newArray[i] = this.#arr[i];
+        }
+        return newArray;
+    }
+    toString(){
+        return this.toArray();
+    }
+    
 }
