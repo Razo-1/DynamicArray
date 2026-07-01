@@ -115,4 +115,13 @@ class DynamicArray{
             [this.#arr[i], this.#arr[j]] = [this.#arr[j], this.#arr[i]];
         }
     }
+    [Symbol.iterator](){
+        let i = 0;
+        return {
+            next : () => {
+                if(i < this.#size) return { value : this.#arr[i++] , done : false };
+                return { value : undefined, done : true };
+            }
+        }
+    }
 }
